@@ -1,6 +1,7 @@
 ﻿using AppTiendaMascotas.accesoDatos;
 using System;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace AppTiendaMascotas.logica
 {
@@ -8,59 +9,60 @@ namespace AppTiendaMascotas.logica
     {
         private Datos dt = new Datos();
 
-        public int ingresarCliente(long cedulaDuenio, string nombreDuenio, long numTelefonoDuenio)
+        public int ingresarCliente(string nombreDuenio, string correoCliente, string numTelefonoDuenio, DateTime fechaNacimientoDuenio)
         {
             int resultado;
-            //paso 1: construyo la sentencia sql para insertar
-            string consulta = "INSERT INTO DUENIO (CEDULADUENIO,NOMBREDUENIO,NUMTELEFONODUENIO) VALUES (" +
-                cedulaDuenio + ",'" + nombreDuenio + "'," + numTelefonoDuenio + ")";
-            //paso 2: enviar la consulta a la capa de accesoDatos para ejecutarla
-            resultado = dt.ejecutarDML(consulta);
+            string consulta = "INSERT INTO CLIENTE (NOMBRECLIENTE, CORREOCLIENTE, TELEFONOCLIENTE, FECHANACIMIENTOCLIENTE) VALUES (@nombreDuenio, @correoCliente, @numTelefonoDuenio, @fechaNacimientoDuenio)";
+
+            MySqlParameter[] parametros = {
+                new MySqlParameter("@nombreDuenio", nombreDuenio),
+                new MySqlParameter("@correoCliente", correoCliente),
+                new MySqlParameter("@numTelefonoDuenio", numTelefonoDuenio),
+                new MySqlParameter("@fechaNacimientoDuenio", fechaNacimientoDuenio.ToString("yyyy-MM-dd"))
+            };
+
+            resultado = dt.ejecutarDML(consulta, parametros);
             return resultado;
         }
 
         public int eliminarCliente(int cedulaCliente)
         {
             int resultado;
-            //paso 1: construyo la sentencia sql para insertar
-            string consulta = "DELETE FROM DUENIO WHERE CEDULADUENIO = " + cedulaCliente;
-            resultado = dt.ejecutarDML(consulta);
+            string consulta = "DELETE FROM CLIENTE WHERE CODIGOCLIENTE = @cedulaCliente";
+            MySqlParameter[] parametros = {
+                new MySqlParameter("@cedulaCliente", cedulaCliente)
+            };
+
+            resultado = dt.ejecutarDML(consulta, parametros);
             return resultado;
         }
 
         public DataSet consultarCliente()
         {
-            DataSet rDT = new DataSet();
-            string consulta;
-            consulta = "SELECT CODIGOCLIENTE CEDULA, NOMBRECLIENTE NOMBRE FROM CLIENTE";
-            rDT = dt.ejecutarSELECT(consulta);
-            return rDT;
+            string consulta = "SELECT CODIGOCLIENTE CEDULA, NOMBRECLIENTE NOMBRE FROM CLIENTE";
+            return dt.ejecutarSELECT(consulta);
         }
 
         public DataSet buscar(string aux)
         {
-            DataSet rDT = new DataSet();
-            string consulta;
-            consulta = "SELECT serialproducto ID, nombreproducto nombre, precioproducto informacion FROM producto WHERE lower(nombreproducto) like '%" + aux + "%' UNION SELECT codempleado, nombreempleado, salarioempleado FROM empleado WHERE lower(nombreempleado) like '%" + aux + "%' UNION SELECT ceduladuenio, nombreduenio, numtelefonoduenio FROM duenio WHERE lower(nombreduenio) like '%" + aux + "%' UNION SELECT idmascota, nombremascota, ceduladuenio FROM mascota WHERE lower(nombremascota) like '%" + aux + "%'";
-            rDT = dt.ejecutarSELECT(consulta);
-            return rDT;
+            string consulta = "SELECT CODIGOCLIENTE, NOMBRECLIENTE, CORREOCLIENTE, TELEFONOCLIENTE, FECHANACIMIENTOCLIENTE FROM CLIENTE WHERE lower(NOMBRECLIENTE) like @aux UNION SELECT CODIGOVENTA, CODIGOCLIENTE, FECHAVENTA, PRODUCTOVENTA, PRECIOVENTA, MENSAJEVENTA FROM VENTA WHERE lower(PRODUCTOVENTA) like @aux";
+            MySqlParameter[] parametros = {
+                new MySqlParameter("@aux", "%" + aux.ToLower() + "%")
+            };
+            return dt.ejecutarSELECT(consulta, parametros);
         }
 
         public DataSet consultarClienteMenu()
         {
-            DataSet rDT = new DataSet();
-            string consulta;
-            consulta = "SELECT CODIGOCLIENTE CEDULA, NOMBRECLIENTE NOMBRE FROM CLIENTE";
-            rDT = dt.ejecutarSELECT(consulta);
-            return rDT;
+            string consulta = "SELECT CODIGOCLIENTE CEDULA, NOMBRECLIENTE NOMBRE FROM CLIENTE";
+            return dt.ejecutarSELECT(consulta);
         }
 
         public int consultarCantidadClientes()
         {
             int cantidadClientes = 0;
-            DataSet rDT = new DataSet();
             string consulta = "SELECT COUNT(CODIGOCLIENTE) FROM CLIENTE";
-            rDT = dt.ejecutarSELECT(consulta);
+            DataSet rDT = dt.ejecutarSELECT(consulta);
             if (rDT.Tables[0].Rows.Count > 0)
             {
                 cantidadClientes = Convert.ToInt32(rDT.Tables[0].Rows[0][0]);
@@ -68,15 +70,11 @@ namespace AppTiendaMascotas.logica
             return cantidadClientes;
         }
 
-
         public DataTable consultarClienteIDs()
         {
-            DataSet mids = new DataSet();
-            string consulta;
-            consulta = "SELECT CEDULADUENIO, NOMBREDUENIO FROM DUENIO";
-            mids = dt.ejecutarSELECT(consulta);
-            DataTable dta = mids.Tables[0];
-            return dta;
+            string consulta = "SELECT CODIGOCLIENTE, NOMBRECLIENTE FROM CLIENTE";
+            DataSet mids = dt.ejecutarSELECT(consulta);
+            return mids.Tables[0];
         }
     }
 }

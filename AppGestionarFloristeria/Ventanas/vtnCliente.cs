@@ -21,9 +21,16 @@ namespace AppTiendaMascotas.Ventanas
 
         private void informacion()
         {
+            // Usamos Invoke para asegurarnos de que la actualización se realiza en el hilo de la UI
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(informacion));
+                return;
+            }
+
             cbxIdClienteDelete.DataSource = cliente.consultarClienteIDs();
-            cbxIdClienteDelete.DisplayMember = "NOMBREDUENIO";
-            cbxIdClienteDelete.ValueMember = "CEDULADUENIO";
+            cbxIdClienteDelete.DisplayMember = "NOMBRECLIENTE";
+            cbxIdClienteDelete.ValueMember = "CODIGOCLIENTE";
 
             DataSet dsResultado = new DataSet();
             dsResultado = cliente.consultarCliente();
@@ -35,7 +42,7 @@ namespace AppTiendaMascotas.Ventanas
         {
             dgvConsultaClientes.Region = new System.Drawing.Region(CreateRoundedRectangle(dgvConsultaClientes.Width, dgvConsultaClientes.Height));
 
-            txtCedulaCliente.Anchor = AnchorStyles.Top;
+            txtCorreoCliente.Anchor = AnchorStyles.Top;
             txtNumTele.Anchor = AnchorStyles.Top;
             txtNombreC.Anchor = AnchorStyles.Top;
             cbxIdClienteDelete.Anchor = AnchorStyles.Top;
@@ -103,22 +110,23 @@ namespace AppTiendaMascotas.Ventanas
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (txtCedulaCliente.Text.Equals("") || txtNumTele.Text.Equals("") || txtNombreC.Text.Equals(""))
+            if (txtCorreoCliente.Text.Equals("") || txtNumTele.Text.Equals("") || txtNombreC.Text.Equals(""))
             {
                 MessageBox.Show("Hay espacios vacios", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             int resultado;
-            long numTelefono, cedulaCliente;
-            string nombreCliente;
+            string nombreCliente, correoCliente, numTelefono;
+            DateTime dateTime;
 
             try
             {
-                cedulaCliente = long.Parse(txtCedulaCliente.Text);
-                numTelefono = long.Parse(txtNumTele.Text);
+                numTelefono = txtNumTele.Text;
                 nombreCliente = txtNombreC.Text;
-                resultado = cliente.ingresarCliente(cedulaCliente, nombreCliente, numTelefono);
+                correoCliente = txtCorreoCliente.Text;
+                dateTime = timeFechaCliente.Value;
+                resultado = cliente.ingresarCliente(nombreCliente, correoCliente, numTelefono, dateTime);
             }
             catch (Exception ex)
             {
@@ -130,7 +138,7 @@ namespace AppTiendaMascotas.Ventanas
             {
                 informacion();
                 MessageBox.Show("Cliente registrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtCedulaCliente.Text = "";
+                txtCorreoCliente.Text = "";
                 txtNumTele.Text = "";
                 txtNombreC.Text = "";
             }

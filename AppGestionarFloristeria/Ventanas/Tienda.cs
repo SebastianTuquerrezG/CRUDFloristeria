@@ -19,6 +19,7 @@ namespace AppTiendaMascotas
         private Cliente cliente = new Cliente();
         private System.Windows.Forms.DataGridView dataGridBuscar;
         private Boolean bandera = true;
+        private System.Timers.Timer timer;
 
         private void Tienda_Load(object sender, EventArgs e)
         {
@@ -56,25 +57,31 @@ namespace AppTiendaMascotas
 
         private void cambiarTexto()
         {
-            var timer = new System.Timers.Timer(TimeSpan.FromMinutes(6000).TotalMinutes);
+            timer = new System.Timers.Timer(TimeSpan.FromMinutes(6000).TotalMilliseconds);
             timer.Elapsed += Timer1_Elapsed;
             timer.Start();
         }
 
         private void Timer1_Elapsed(object sender, ElapsedEventArgs e)
         {
-            try
+            // Invocar en el hilo de la UI para actualizar el control
+            if (lblHora.InvokeRequired)
             {
                 lblHora.Invoke((MethodInvoker)delegate
                 {
-                    DateTime now = DateTime.Now;
-                    lblHora.Text = now.ToString("dd 'de' MMMM 'del' yyyy");
+                    ActualizarHora();
                 });
             }
-            catch (Exception)
+            else
             {
-                throw;
+                ActualizarHora();
             }
+        }
+
+        private void ActualizarHora()
+        {
+            DateTime now = DateTime.Now;
+            lblHora.Text = now.ToString("dd 'de' MMMM 'del' yyyy");
         }
 
         private System.Drawing.Drawing2D.GraphicsPath CreateRoundedRectangle(int buttonWidth, int buttonHeight)
