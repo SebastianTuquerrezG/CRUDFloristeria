@@ -51,6 +51,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.timeFechaCliente = new System.Windows.Forms.DateTimePicker();
+            this.btnGuardarChange = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -206,7 +207,7 @@
             this.dgvConsultaClientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvConsultaClientes.EnableHeadersVisualStyles = false;
             this.dgvConsultaClientes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvConsultaClientes.Location = new System.Drawing.Point(16, 510);
+            this.dgvConsultaClientes.Location = new System.Drawing.Point(16, 492);
             this.dgvConsultaClientes.Name = "dgvConsultaClientes";
             this.dgvConsultaClientes.ReadOnly = true;
             this.dgvConsultaClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -228,7 +229,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dgvConsultaClientes.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvConsultaClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConsultaClientes.Size = new System.Drawing.Size(692, 259);
+            this.dgvConsultaClientes.Size = new System.Drawing.Size(692, 337);
             this.dgvConsultaClientes.TabIndex = 36;
             // 
             // btnEliminarCliente
@@ -338,13 +339,35 @@
             this.timeFechaCliente.Size = new System.Drawing.Size(299, 24);
             this.timeFechaCliente.TabIndex = 49;
             // 
+            // btnGuardarChange
+            // 
+            this.btnGuardarChange.BackColor = System.Drawing.Color.Transparent;
+            this.btnGuardarChange.BackgroundImage = global::AppTiendaFloristeria.Properties.Resources.Rectangle_7__3_;
+            this.btnGuardarChange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnGuardarChange.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGuardarChange.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnGuardarChange.FlatAppearance.BorderSize = 0;
+            this.btnGuardarChange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnGuardarChange.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnGuardarChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardarChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarChange.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarChange.Location = new System.Drawing.Point(351, 449);
+            this.btnGuardarChange.Name = "btnGuardarChange";
+            this.btnGuardarChange.Size = new System.Drawing.Size(201, 37);
+            this.btnGuardarChange.TabIndex = 50;
+            this.btnGuardarChange.Text = "Guardar Cambios";
+            this.btnGuardarChange.UseVisualStyleBackColor = false;
+            this.btnGuardarChange.Click += new System.EventHandler(this.btnGuardarChange_Click);
+            // 
             // vtnCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
-            this.ClientSize = new System.Drawing.Size(736, 576);
+            this.ClientSize = new System.Drawing.Size(736, 581);
+            this.Controls.Add(this.btnGuardarChange);
             this.Controls.Add(this.timeFechaCliente);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtNombreC);
@@ -397,5 +420,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker timeFechaCliente;
+        private System.Windows.Forms.Button btnGuardarChange;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AppTiendaMascotas.logica;
+using MySqlX.XDevAPI;
 using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace AppTiendaMascotas.Ventanas
@@ -23,6 +25,7 @@ namespace AppTiendaMascotas.Ventanas
         private Cliente cli = new Cliente();
         private Venta vent = new Venta();
         private int codEmpleado = 1; // Define el ID del empleado o obténlo dinámicamente
+        private DataTable dataTable;
 
         private void informacion()
         {
@@ -39,7 +42,7 @@ namespace AppTiendaMascotas.Ventanas
             DataSet dsResultado = vent.consultarVentas();
 
             // Convertir el DataSet a DataTable
-            DataTable dataTable = dsResultado.Tables["ResultadoDatos"];
+            dataTable = dsResultado.Tables["ResultadoDatos"]; // Asignar a la variable de instancia
 
             // Crear una nueva DataTable para el DataGridView
             DataTable displayTable = new DataTable();
@@ -111,6 +114,9 @@ namespace AppTiendaMascotas.Ventanas
             // Ajustar la altura de las filas
             dgvConsultaVenta.RowTemplate.Height = 40; // Ajusta el valor a lo que necesites
             dgvConsultaVenta.Refresh();
+            dgvConsultaVenta.AllowUserToAddRows = false; // Impide que el usuario agregue nuevas filas
+            dgvConsultaVenta.AllowUserToDeleteRows = false; // Impide que el usuario elimine filas
+            dgvConsultaVenta.ReadOnly = false; // Permite la edición
         }
 
         private Image ByteArrayToImage(byte[] byteArray)
@@ -119,9 +125,41 @@ namespace AppTiendaMascotas.Ventanas
                 return null;
             using (MemoryStream ms = new MemoryStream(byteArray))
             {
-                return Image.FromStream(ms);
+                // Asegurarse de que MemoryStream no sea nulo
+                if (ms == null)
+                    return null;
+
+                try
+                {
+                    return Image.FromStream(ms);
+                }
+                catch (ArgumentException)
+                {
+                    // Manejo del caso cuando la imagen no puede ser creada desde el stream
+                    return null;
+                }
             }
         }
+
+        private byte[] ImageToByteArray(Image image)
+        {
+            if (image == null)
+                return null;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                try
+                {
+                    image.Save(ms, image.RawFormat);
+                    return ms.ToArray();
+                }
+                catch (ExternalException)
+                {
+                    // Manejar el caso donde la imagen no se puede guardar
+                    return null;
+                }
+            }
+        }
+
 
         private void dgvConsultaVenta_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -247,7 +285,7 @@ namespace AppTiendaMascotas.Ventanas
                 return;
             }
 
-            int idCliente, numProducto, valorVenta, resultado;
+            int idCliente, valorVenta, resultado;
             DateTime fechaVenta = timeFechaVenta.Value;
             byte[] fotoVenta = GetImageBytes(pictureBoxVenta.Image);
 
@@ -255,7 +293,16 @@ namespace AppTiendaMascotas.Ventanas
             {
                 idCliente = Convert.ToInt32(cbxCliente.SelectedValue);
                 valorVenta = int.Parse(txtPrecioVenta.Text);
-                resultado = vent.ingresarVenta(idCliente, richTextBoxDesc.Text, valorVenta, richTextBoxMensaje.Text, fechaVenta, fotoVenta);
+                // Si el ID de la venta está vacío, es una nueva venta
+                if (string.IsNullOrEmpty(cbxIdVentaDelete.Text))
+                {
+                    resultado = vent.ingresarVenta(idCliente, richTextBoxDesc.Text, valorVenta, richTextBoxMensaje.Text, fechaVenta, fotoVenta);
+                }
+                else
+                {
+                    int idVenta = Convert.ToInt32(cbxIdVentaDelete.SelectedValue);
+                    resultado = vent.actualizarVenta(idVenta, idCliente, richTextBoxDesc.Text, valorVenta, richTextBoxMensaje.Text, fechaVenta, fotoVenta);
+                }
             }
             catch (Exception ex)
             {
@@ -272,6 +319,7 @@ namespace AppTiendaMascotas.Ventanas
                 richTextBoxDesc.Text = "";
                 cbxCliente.Text = "";
                 timeFechaVenta.Value = DateTime.Now;
+                cbxIdVentaDelete.Text = ""; // Limpiar el combobox de eliminación
             }
             else
             {
@@ -356,5 +404,40 @@ namespace AppTiendaMascotas.Ventanas
                 pictureBoxVenta.Image = Image.FromFile(openFileDialog.FileName);
             }
         }
+
+        private void btnGuardarChanges_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Recorre cada fila del DataGridView
+                foreach (DataGridViewRow row in dgvConsultaVenta.Rows)
+                {
+                    if (row.IsNewRow)
+                    {
+                        continue;
+                    }
+
+                    int ventaId = Convert.ToInt32(row.Cells["VENTA"].Value);
+                    int cliente = Convert.ToInt32(row.Cells["CLIENTE"].Value);
+                    DateTime fecha = Convert.ToDateTime(row.Cells["FECHA"].Value);
+                    string producto = row.Cells["PRODUCTO"].Value.ToString();
+                    double precio = Convert.ToDouble(row.Cells["PRECIO"].Value);
+                    string mensaje = row.Cells["MENSAJE"].Value.ToString();
+                    Image foto = row.Cells["FOTO"].Value as Image;
+                    byte[] fotoBytes = ImageToByteArray(foto);
+
+                    // Aquí puedes usar un método de la clase Venta para actualizar los datos en la base de datos
+                    vent.actualizarVenta(ventaId, cliente, producto, precio, mensaje, fecha, fotoBytes);
+                }
+
+                MessageBox.Show("Cambios guardados correctamente.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar cambios: " + ex.Message);
+            }
+        }
+
+
     }
 }

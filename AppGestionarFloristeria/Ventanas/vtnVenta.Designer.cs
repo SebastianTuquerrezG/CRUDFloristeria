@@ -51,12 +51,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnElegirFoto = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.FotoProd = new System.Windows.Forms.OpenFileDialog();
             this.pictureBoxVenta = new System.Windows.Forms.PictureBox();
             this.richTextBoxDesc = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBoxMensaje = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnGuardarChanges = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVenta)).BeginInit();
@@ -222,7 +223,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             this.dgvConsultaVenta.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvConsultaVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConsultaVenta.Size = new System.Drawing.Size(692, 259);
+            this.dgvConsultaVenta.Size = new System.Drawing.Size(692, 445);
             this.dgvConsultaVenta.TabIndex = 36;
             // 
             // btnEliminar
@@ -356,9 +357,9 @@
             this.btnElegirFoto.UseVisualStyleBackColor = false;
             this.btnElegirFoto.Click += new System.EventHandler(this.btnElegirFoto_Click);
             // 
-            // openFileDialog1
+            // FotoProd
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.FotoProd.FileName = "Foto Producto";
             // 
             // pictureBoxVenta
             // 
@@ -415,6 +416,27 @@
             this.pictureBox2.TabIndex = 61;
             this.pictureBox2.TabStop = false;
             // 
+            // btnGuardarChanges
+            // 
+            this.btnGuardarChanges.BackColor = System.Drawing.Color.Transparent;
+            this.btnGuardarChanges.BackgroundImage = global::AppTiendaFloristeria.Properties.Resources.Rectangle_7__3_;
+            this.btnGuardarChanges.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnGuardarChanges.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGuardarChanges.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnGuardarChanges.FlatAppearance.BorderSize = 0;
+            this.btnGuardarChanges.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnGuardarChanges.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnGuardarChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardarChanges.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarChanges.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarChanges.Location = new System.Drawing.Point(380, 641);
+            this.btnGuardarChanges.Name = "btnGuardarChanges";
+            this.btnGuardarChanges.Size = new System.Drawing.Size(232, 37);
+            this.btnGuardarChanges.TabIndex = 62;
+            this.btnGuardarChanges.Text = "Guardar Cambios";
+            this.btnGuardarChanges.UseVisualStyleBackColor = false;
+            this.btnGuardarChanges.Click += new System.EventHandler(this.btnGuardarChanges_Click);
+            // 
             // vtnVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -422,6 +444,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.ClientSize = new System.Drawing.Size(753, 555);
+            this.Controls.Add(this.btnGuardarChanges);
             this.Controls.Add(this.richTextBoxMensaje);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.richTextBoxDesc);
@@ -479,11 +502,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnElegirFoto;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog FotoProd;
         private System.Windows.Forms.PictureBox pictureBoxVenta;
         private System.Windows.Forms.RichTextBox richTextBoxDesc;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBoxMensaje;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnGuardarChanges;
     }
 }

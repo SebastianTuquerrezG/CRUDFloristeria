@@ -167,6 +167,11 @@ namespace AppTiendaMascotas.Ventanas
                 // Ajustar la altura de las filas
                 dgvConsultaClientes.RowTemplate.Height = 100; // Ajusta el valor a lo que necesites
                 dgvConsultaClientes.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+
+                dgvConsultaClientes.AllowUserToAddRows = false; // Impide que el usuario agregue nuevas filas
+                dgvConsultaClientes.AllowUserToDeleteRows = false; // Impide que el usuario elimine filas
+                dgvConsultaClientes.ReadOnly = false; // Permite la edición
+
             }
             else
             {

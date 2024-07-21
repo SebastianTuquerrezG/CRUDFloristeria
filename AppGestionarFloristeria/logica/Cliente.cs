@@ -45,7 +45,7 @@ namespace AppTiendaMascotas.logica
 
         public DataSet buscar(string aux)
         {
-            string consulta = "SELECT CODIGOCLIENTE, NOMBRECLIENTE, CORREOCLIENTE, TELEFONOCLIENTE, FECHANACIMIENTOCLIENTE FROM CLIENTE WHERE lower(NOMBRECLIENTE) like @aux UNION SELECT CODIGOVENTA, CODIGOCLIENTE, FECHAVENTA, PRODUCTOVENTA, PRECIOVENTA, MENSAJEVENTA FROM VENTA WHERE lower(PRODUCTOVENTA) like @aux";
+            string consulta = "SELECT CODIGOCLIENTE, NOMBRECLIENTE, CORREOCLIENTE, TELEFONOCLIENTE, FECHANACIMIENTOCLIENTE FROM CLIENTE WHERE lower(NOMBRECLIENTE) like '%" + aux + "%' UNION SELECT CODIGOVENTA, CODIGOCLIENTE, FECHAVENTA, PRODUCTOVENTA, PRECIOVENTA, MENSAJEVENTA FROM VENTA WHERE lower(PRODUCTOVENTA) like '%" + aux + "%'";
             MySqlParameter[] parametros = {
                 new MySqlParameter("@aux", "%" + aux.ToLower() + "%")
             };
@@ -114,10 +114,24 @@ namespace AppTiendaMascotas.logica
 
             MySqlParameter[] parametros = {
         new MySqlParameter("@idCliente", idCliente)
-    };
+        };
 
             return dt.ejecutarSELECT(consulta, parametros);
         }
 
+        public int actualizarCliente(int idCliente, string nombreCliente, string correoCliente, string telefonoCliente, DateTime fechaNacimientoCliente)
+        {
+            string consulta = "UPDATE CLIENTE SET NOMBRECLIENTE = @nombreCliente, CORREOCLIENTE = @correoCliente, TELEFONOCLIENTE = @telefonoCliente, FECHANACIMIENTOCLIENTE = @fechaNacimientoCliente WHERE CODIGOCLIENTE = @idCliente";
+
+            MySqlParameter[] parametros = {
+                new MySqlParameter("@idCliente", idCliente),
+                new MySqlParameter("@nombreCliente", nombreCliente),
+                new MySqlParameter("@correoCliente", correoCliente),
+                new MySqlParameter("@telefonoCliente", telefonoCliente),
+                new MySqlParameter("@fechaNacimientoCliente", fechaNacimientoCliente.ToString("yyyy-MM-dd"))
+            };
+
+            return dt.ejecutarDML(consulta, parametros);
+        }
     }
 }

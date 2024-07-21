@@ -30,6 +30,24 @@ namespace AppTiendaMascotas.logica
             return resultado;
         }
 
+        public int actualizarVenta(int idVenta, int idCliente, string descVenta, double precioVenta, string mensajeVenta, DateTime fechaVenta, byte[] fotoVenta)
+        {
+            string consulta = "UPDATE Venta SET CodigoCliente = @CodigoCliente, FechaVenta = @FechaVenta, ProductoVenta = @ProductoVenta, PrecioVenta = @PrecioVenta, MensajeVenta = @MensajeVenta, FotoVenta = @FotoVenta WHERE CodigoVenta = @CodigoVenta";
+
+            MySqlParameter[] parametros = new MySqlParameter[]
+            {
+                new MySqlParameter("@CodigoVenta", idVenta),
+                new MySqlParameter("@CodigoCliente", idCliente),
+                new MySqlParameter("@FechaVenta", fechaVenta),
+                new MySqlParameter("@ProductoVenta", descVenta),
+                new MySqlParameter("@PrecioVenta", precioVenta),
+                new MySqlParameter("@MensajeVenta", mensajeVenta ?? (object)DBNull.Value),
+                new MySqlParameter("@FotoVenta", fotoVenta ?? (object)DBNull.Value)
+            };
+
+            return dt.ejecutarDML(consulta, parametros);
+        }
+
         public int eliminarVenta(int idVenta)
         {
             int resultado;

@@ -1,13 +1,22 @@
 ﻿using AppTiendaMascotas.logica;
 using System;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Windows.Forms;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using MySql.Data.MySqlClient;
+using AppTiendaMascotas.accesoDatos;
 
 namespace AppTiendaMascotas.Ventanas
 {
     public partial class vtnCliente : Form
     {
+        private Datos datos = new Datos();
+        private Cliente cliente = new Cliente();
+        private DataTable dataTable;
+
         public vtnCliente()
         {
             InitializeComponent();
@@ -17,7 +26,6 @@ namespace AppTiendaMascotas.Ventanas
 
         private Boolean bandera = true;
         private Boolean bandera2 = false;
-        private Cliente cliente = new Cliente();
 
         private void informacion()
         {
@@ -32,10 +40,19 @@ namespace AppTiendaMascotas.Ventanas
             cbxIdClienteDelete.DisplayMember = "NOMBRECLIENTE";
             cbxIdClienteDelete.ValueMember = "CODIGOCLIENTE";
 
-            DataSet dsResultado = new DataSet();
-            dsResultado = cliente.consultarCliente();
-            dgvConsultaClientes.DataSource = dsResultado;
-            dgvConsultaClientes.DataMember = "ResultadoDatos";
+            string connectionString = datos.getCadenaConexion();
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM CLIENTE";
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, connection);
+                dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                dgvConsultaClientes.DataSource = dataTable;
+                dgvConsultaClientes.AllowUserToAddRows = false;
+                dgvConsultaClientes.AllowUserToDeleteRows = false;
+                dgvConsultaClientes.ReadOnly = false;
+            }
+
         }
 
         private void style()
@@ -177,6 +194,29 @@ namespace AppTiendaMascotas.Ventanas
             else
             {
                 MessageBox.Show("Cliente no eliminado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnGuardarChange_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    int idCliente = Convert.ToInt32(row["CODIGOCLIENTE"]);
+                    string nombreCliente = row["NOMBRECLIENTE"].ToString();
+                    string correoCliente = row["CORREOCLIENTE"].ToString();
+                    string telefonoCliente = row["TELEFONOCLIENTE"].ToString();
+                    DateTime fechaNacimientoCliente = Convert.ToDateTime(row["FECHANACIMIENTOCLIENTE"]);
+
+                    cliente.actualizarCliente(idCliente, nombreCliente, correoCliente, telefonoCliente, fechaNacimientoCliente);
+                }
+
+                MessageBox.Show("Cambios guardados exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar los cambios: " + ex.Message);
             }
         }
     }
