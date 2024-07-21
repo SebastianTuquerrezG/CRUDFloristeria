@@ -34,6 +34,7 @@ namespace AppTiendaMascotas
             btnCliente.Region = new System.Drawing.Region(CreateRoundedRectangle(btnCliente.Width, btnCliente.Height));
             btnVenta.Region = new System.Drawing.Region(CreateRoundedRectangle(btnVenta.Width, btnVenta.Height));
             btnAcercaDe.Region = new System.Drawing.Region(CreateRoundedRectangle(btnAcercaDe.Width, btnAcercaDe.Height));
+            btnVentaXCliente.Region = new System.Drawing.Region(CreateRoundedRectangle(btnVentaXCliente.Width, btnVentaXCliente.Height));
         }
 
         private void textoMenu()
@@ -42,15 +43,15 @@ namespace AppTiendaMascotas
 
             if (now.Hour >= 6 && now.Hour < 12)
             {
-                lblHora.Text = "Buenos días " + Environment.MachineName;
+                lblHora.Text = "Buenos días " + now.Hour + ":" + now.Minute + " EuroFlor";
             }
             else if (now.Hour >= 12 && now.Hour < 18)
             {
-                lblHora.Text = "Buenas tardes " + Environment.MachineName;
+                lblHora.Text = "Buenas tardes " + now.Hour + ":" + now.Minute + " EuroFlor";
             }
             else if (now.Hour >= 18 || now.Hour < 6)
             {
-                lblHora.Text = "Buenas noches " + Environment.MachineName;
+                lblHora.Text = "Buenas noches " + now.Hour + ":" + now.Minute + " EuroFlor";
             }
         }
 
@@ -193,6 +194,7 @@ namespace AppTiendaMascotas
             btnCliente.BackColor = Color.FromArgb(46, 48, 51);
             btnAcercaDe.BackColor = Color.FromArgb(46, 48, 51);
             btnVenta.BackColor = Color.FromArgb(46, 48, 51);
+            btnVentaXCliente.BackColor = Color.FromArgb(46, 48, 51);
             metodoBuscar();
         }
 
@@ -203,6 +205,7 @@ namespace AppTiendaMascotas
             btnCliente.BackColor = Color.FromArgb(25, 25, 25);
             btnAcercaDe.BackColor = Color.FromArgb(46, 48, 51);
             btnVenta.BackColor = Color.FromArgb(46, 48, 51);
+            btnVentaXCliente.BackColor = Color.FromArgb(46, 48, 51);
             metodoBuscar();
         }
 
@@ -213,6 +216,7 @@ namespace AppTiendaMascotas
             btnCliente.BackColor = Color.FromArgb(46, 48, 51);
             btnAcercaDe.BackColor = Color.FromArgb(46, 48, 51);
             btnVenta.BackColor = Color.FromArgb(25, 25, 25);
+            btnVentaXCliente.BackColor = Color.FromArgb(46, 48, 51);
             metodoBuscar();
         }
 
@@ -223,6 +227,18 @@ namespace AppTiendaMascotas
             btnCliente.BackColor = Color.FromArgb(46, 48, 51);
             btnAcercaDe.BackColor = Color.FromArgb(25, 25, 25);
             btnVenta.BackColor = Color.FromArgb(46, 48, 51);
+            btnVentaXCliente.BackColor = Color.FromArgb(46, 48, 51);
+            metodoBuscar();
+        }
+
+        private void btnVentaXCliente_Click(object sender, EventArgs e)
+        {
+            abrirFormHija(new vtnVentaXCliente());
+            btnInicio.BackColor = Color.FromArgb(46, 48, 51);
+            btnCliente.BackColor = Color.FromArgb(46, 48, 51);
+            btnAcercaDe.BackColor = Color.FromArgb(46, 48, 51);
+            btnVenta.BackColor = Color.FromArgb(46, 48, 51);
+            btnVentaXCliente.BackColor = Color.FromArgb(25, 25, 25);
             metodoBuscar();
         }
     }

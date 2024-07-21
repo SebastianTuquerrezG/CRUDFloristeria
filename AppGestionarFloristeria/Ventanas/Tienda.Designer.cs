@@ -31,6 +31,7 @@ namespace AppTiendaMascotas
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tienda));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnVentaXCliente = new System.Windows.Forms.Button();
             this.lblHora = new System.Windows.Forms.Label();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.btnAcercaDe = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@ namespace AppTiendaMascotas
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelCentral = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -54,7 +54,7 @@ namespace AppTiendaMascotas
             // 
             // panelMenu
             // 
-            this.panelMenu.Controls.Add(this.button1);
+            this.panelMenu.Controls.Add(this.btnVentaXCliente);
             this.panelMenu.Controls.Add(this.lblHora);
             this.panelMenu.Controls.Add(this.pbLogo);
             this.panelMenu.Controls.Add(this.btnAcercaDe);
@@ -67,6 +67,26 @@ namespace AppTiendaMascotas
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(183, 642);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnVentaXCliente
+            // 
+            this.btnVentaXCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(48)))), ((int)(((byte)(51)))));
+            this.btnVentaXCliente.BackgroundImage = global::AppTiendaFloristeria.Properties.Resources.mdi_users_group;
+            this.btnVentaXCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnVentaXCliente.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVentaXCliente.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(48)))), ((int)(((byte)(51)))));
+            this.btnVentaXCliente.FlatAppearance.BorderSize = 0;
+            this.btnVentaXCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVentaXCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVentaXCliente.ForeColor = System.Drawing.Color.White;
+            this.btnVentaXCliente.Location = new System.Drawing.Point(25, 264);
+            this.btnVentaXCliente.Name = "btnVentaXCliente";
+            this.btnVentaXCliente.Size = new System.Drawing.Size(132, 58);
+            this.btnVentaXCliente.TabIndex = 14;
+            this.btnVentaXCliente.Text = "       Venta X            Cliente";
+            this.btnVentaXCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVentaXCliente.UseVisualStyleBackColor = false;
+            this.btnVentaXCliente.Click += new System.EventHandler(this.btnVentaXCliente_Click);
             // 
             // lblHora
             // 
@@ -104,7 +124,7 @@ namespace AppTiendaMascotas
             this.btnAcercaDe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAcercaDe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAcercaDe.ForeColor = System.Drawing.Color.White;
-            this.btnAcercaDe.Location = new System.Drawing.Point(23, 305);
+            this.btnAcercaDe.Location = new System.Drawing.Point(23, 328);
             this.btnAcercaDe.Name = "btnAcercaDe";
             this.btnAcercaDe.Size = new System.Drawing.Size(132, 34);
             this.btnAcercaDe.TabIndex = 13;
@@ -244,25 +264,6 @@ namespace AppTiendaMascotas
             this.panelCentral.Size = new System.Drawing.Size(740, 587);
             this.panelCentral.TabIndex = 2;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(48)))), ((int)(((byte)(51)))));
-            this.button1.BackgroundImage = global::AppTiendaFloristeria.Properties.Resources.material_symbols_point_of_sale;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(48)))), ((int)(((byte)(51)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(25, 264);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 34);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "       Ventas";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // Tienda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,6 +305,6 @@ namespace AppTiendaMascotas
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnVentaXCliente;
     }
 }

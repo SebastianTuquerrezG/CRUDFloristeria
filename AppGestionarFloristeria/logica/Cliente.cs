@@ -96,5 +96,28 @@ namespace AppTiendaMascotas.logica
 
             return dt.ejecutarSELECT(consulta, parametros);
         }
+
+        public DataSet consultarVentasPorCliente(int idCliente)
+        {
+            string consulta = @"
+        SELECT 
+            v.CODIGOVENTA as VENTA, 
+            v.FECHAVENTA as FECHA, 
+            v.PRODUCTOVENTA as PRODUCTO,
+            v.PRECIOVENTA as PRECIO,
+            v.MENSAJEVENTA as MENSAJE,
+            v.FOTOVENTA as FOTO
+        FROM 
+            VENTA v
+        WHERE 
+            v.CODIGOCLIENTE = @idCliente";
+
+            MySqlParameter[] parametros = {
+        new MySqlParameter("@idCliente", idCliente)
+    };
+
+            return dt.ejecutarSELECT(consulta, parametros);
+        }
+
     }
 }

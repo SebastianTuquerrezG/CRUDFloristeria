@@ -203,6 +203,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas\vtnVentaXCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventanas\vtnVentaXCliente.Designer.cs">
+      <DependentUpon>vtnVentaXCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventanas\vtnConexion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,6 +249,9 @@
     <Compile Include="Ventanas\vtnCliente.Designer.cs">
       <DependentUpon>vtnCliente.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Ventanas\vtnVentaXCliente.resx">
+      <DependentUpon>vtnVentaXCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventanas\vtnConexion.resx">
       <DependentUpon>vtnConexion.cs</DependentUpon>
     </EmbeddedResource>
