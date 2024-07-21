@@ -76,5 +76,25 @@ namespace AppTiendaMascotas.logica
             DataSet mids = dt.ejecutarSELECT(consulta);
             return mids.Tables[0];
         }
+
+        public DataSet consultarClientesCumpleañosHoy()
+        {
+            // Obtener la fecha actual
+            DateTime today = DateTime.Now;
+            // Formatear el mes y el día para la consulta
+            string todayMonthDay = today.ToString("MM-dd");
+
+            // Consulta SQL para seleccionar clientes cuyo mes y día de nacimiento coincidan con la fecha actual
+            string consulta = @"
+            SELECT CODIGOCLIENTE CLIENTE, NOMBRECLIENTE NOMBRE, CORREOCLIENTE CORREO, TELEFONOCLIENTE TELEFONO
+            FROM CLIENTE
+            WHERE DATE_FORMAT(FECHANACIMIENTOCLIENTE, '%m-%d') = @todayMonthDay";
+
+                MySqlParameter[] parametros = {
+            new MySqlParameter("@todayMonthDay", todayMonthDay)
+            };
+
+            return dt.ejecutarSELECT(consulta, parametros);
+        }
     }
 }

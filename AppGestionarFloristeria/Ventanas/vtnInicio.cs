@@ -25,7 +25,7 @@ namespace AppTiendaMascotas.Ventanas
             DataSet dsResultado = new DataSet();
 
             // Consultar cuántos clientes cumplen años hoy
-            dsResultado = cliente.consultarClienteMenu();
+            dsResultado = cliente.consultarClientesCumpleañosHoy();
             dataGridClientes.DataSource = dsResultado;
             dataGridClientes.DataMember = "ResultadoDatos";
 

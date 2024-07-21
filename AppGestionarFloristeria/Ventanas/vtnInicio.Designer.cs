@@ -46,7 +46,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 392);
+            this.label1.Location = new System.Drawing.Point(21, 392);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(535, 39);
             this.label1.TabIndex = 20;
@@ -79,7 +79,7 @@
             this.dataGridClientes.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridClientes.EnableHeadersVisualStyles = false;
             this.dataGridClientes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridClientes.Location = new System.Drawing.Point(216, 434);
+            this.dataGridClientes.Location = new System.Drawing.Point(152, 434);
             this.dataGridClientes.Name = "dataGridClientes";
             this.dataGridClientes.ReadOnly = true;
             this.dataGridClientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -101,7 +101,7 @@
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridClientes.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridClientes.Size = new System.Drawing.Size(343, 240);
+            this.dataGridClientes.Size = new System.Drawing.Size(446, 240);
             this.dataGridClientes.TabIndex = 19;
             // 
             // lblClientesRegistrados

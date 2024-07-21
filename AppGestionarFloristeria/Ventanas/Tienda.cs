@@ -18,7 +18,6 @@ namespace AppTiendaMascotas
         private Form fH;
         private Cliente cliente = new Cliente();
         private System.Windows.Forms.DataGridView dataGridBuscar;
-        private Boolean bandera = true;
         private System.Timers.Timer timer;
 
         private void Tienda_Load(object sender, EventArgs e)
@@ -183,9 +182,7 @@ namespace AppTiendaMascotas
 
         private void metodoBuscar()
         {
-            bandera = false;
             txtBuscar.Text = "Buscar";
-            bandera = true;
             txtBuscar.ForeColor = System.Drawing.Color.DarkGray;
         }
 

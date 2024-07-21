@@ -1,4 +1,6 @@
 ﻿using AppTiendaMascotas.accesoDatos;
+using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 
 namespace AppTiendaMascotas.logica
@@ -7,69 +9,61 @@ namespace AppTiendaMascotas.logica
     {
         private Datos dt = new Datos();
 
-        public int ingresarVenta(int idProducto, int idEmpleado, int numProducto, int valorVenta)
+        // Método para ingresar una venta
+        public int ingresarVenta(int idCliente, string descVenta, int precioVenta, string mensajeVenta, DateTime fechaVenta, byte[] fotoVenta)
         {
             int resultado;
-            //paso 1: construyo la sentencia sql para insertar
-            string consulta = "INSERT INTO VENTA (IDPRODUCTO,IDEMPLEADO,NUMPRODUCTO,VALORVENTA) VALUES (" +
-                idProducto + "," + idEmpleado + "," + numProducto + "," + valorVenta + ")";
-            //paso 2: enviar la consulta a la capa de accesoDatos para ejecutarla
-            resultado = dt.ejecutarDML(consulta);
+            string consulta = "INSERT INTO Venta (CodigoCliente, FechaVenta, ProductoVenta, PrecioVenta, MensajeVenta, FotoVenta) VALUES " +
+                              "(@CodigoCliente, @FechaVenta, @ProductoVenta, @PrecioVenta, @MensajeVenta, @FotoVenta)";
+
+            MySqlParameter[] parametros = new MySqlParameter[]
+            {
+                new MySqlParameter("@CodigoCliente", idCliente),
+                new MySqlParameter("@FechaVenta", fechaVenta),
+                new MySqlParameter("@ProductoVenta", descVenta),
+                new MySqlParameter("@PrecioVenta", precioVenta),
+                new MySqlParameter("@MensajeVenta", mensajeVenta ?? (object)DBNull.Value),
+                new MySqlParameter("@FotoVenta", fotoVenta ?? (object)DBNull.Value)
+            };
+
+            resultado = dt.ejecutarDML(consulta, parametros);
             return resultado;
         }
 
         public int eliminarVenta(int idVenta)
         {
             int resultado;
-            //paso 1: construyo la sentencia sql para insertar
-            string consulta = "DELETE FROM VENTA WHERE IDVENTA = " + idVenta;
-            resultado = dt.ejecutarDML(consulta);
+            string consulta = "DELETE FROM Venta WHERE CodigoVenta = @CodigoVenta";
+            MySqlParameter[] parametros = new MySqlParameter[]
+            {
+                new MySqlParameter("@CodigoVenta", idVenta)
+            };
+            resultado = dt.ejecutarDML(consulta, parametros);
             return resultado;
         }
 
         public DataSet consultarVentas()
         {
-            DataSet rDT = new DataSet();
-            string consulta;
-            consulta = "SELECT IDVENTA,IDPRODUCTO,IDEMPLEADO,NUMPRODUCTO,FECHAVENTA,VALORVENTA FROM VENTA";
-            rDT = dt.ejecutarSELECT(consulta);
-            return rDT;
+            string consulta = "SELECT CodigoVenta as VENTA, CodigoCliente as CLIENTE, FechaVenta as FECHA, ProductoVenta as PRODUCTO, PrecioVenta as PRECIO, MensajeVenta as MENSAJE, FotoVenta as FOTO FROM Venta";
+            return dt.ejecutarSELECT(consulta);
         }
 
-        public DataSet consultarVentasMenu()
-        {
-            DataSet rDT = new DataSet();
-            string consulta;
-            consulta = "SELECT NOMBREPRODUCTO Nombre, NUMPRODUCTO Cantidad, VALORVENTA Total FROM VENTA INNER JOIN PRODUCTO ON producto.serialproducto = venta.idproducto ORDER BY FECHAVENTA DESC";
-            rDT = dt.ejecutarSELECT(consulta);
-            return rDT;
-        }
-
-        public DataSet consultarVentaTotal()
-        {
-            DataSet rDT = new DataSet();
-            string consulta;
-            consulta = "SELECT PRECIOVENTA FROM VENTA";
-            rDT = dt.ejecutarSELECT(consulta);
-            return rDT;
-        }
 
         public DataTable consultarVentaIDs()
         {
-            DataSet mids = new DataSet();
-            string consulta;
-            consulta = "SELECT IDVENTA FROM VENTA";
-            mids = dt.ejecutarSELECT(consulta);
-            DataTable dta = mids.Tables[0];
-            return dta;
+            string consulta = "SELECT CodigoVenta FROM Venta";
+            DataSet ds = dt.ejecutarSELECT(consulta);
+            return ds.Tables["ResultadoDatos"];
         }
 
-        public DataSet valorVenta(string idProducto)
+        public DataSet valorVenta(string nombreProducto)
         {
-            DataSet rDT = new DataSet();
-            string consulta = "SELECT PRECIOPRODUCTO FROM PRODUCTO WHERE NOMBREPRODUCTO = 'Cama Perro'";
-            rDT = dt.ejecutarSELECT(consulta);
-            return rDT;
+            string consulta = "SELECT PrecioProducto FROM Producto WHERE NombreProducto = @NombreProducto";
+            MySqlParameter[] parametros = new MySqlParameter[]
+            {
+                new MySqlParameter("@NombreProducto", nombreProducto)
+            };
+            return dt.ejecutarSELECT(consulta, parametros);
         }
     }
 }
