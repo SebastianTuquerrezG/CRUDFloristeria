@@ -1,35 +1,28 @@
 # Veterinary Management App
-This is a project to create a veterinary clinic management application. With this application, clinic owners and their employees will be able to keep a record of pets, appointments, products, accommodations, lodgings, customers, sales, and purchases.
+This is a project to create a flower shop management application. With this application, florist owners and their employees will be able to keep a record of  customers and sales.
 
 # Features
-* Lodging registration
-* Customer registration
-* Employee registration
-* Product registration
-* Pet registration
-* Accommodation registration
-* Attention administration
+* Login registration
 * Sales registration
-* Purchases registration
-* Manager administration
-* Searches
+* Export to Excel
+* Edit from DataGridView
 
 # Used technologies
 * Programming language: C#
 * Framework: .NET Framework 4.7.2
-* Database: Oracle SQL
+* Database: MySql
 
 # Prerequisites
 * Visual Studio 2019 or 2022 (with C# and VisualForms)
-* Oracle SQL Version 11g or higher
+* MySql Full
 * Git
 
 # Installation
 1. Clone the repository:
 ```
-git clone https://github.com/Pablo-Restrepo/AppGestionarAnimales.git
+git clone https://github.com/SebastianTuquerrezG/CRUDFloristeria
 ```
-2. Create the database in Oracle SQL with the scripts from `AppGestionarAnimales/SQL/`
+2. Create the database in MySql with the scripts from `CRUDFloristeria/SQL/`
 
 3. Install the necessary dependencies in the project (NuGet):
 
@@ -51,8 +44,6 @@ git clone https://github.com/Pablo-Restrepo/AppGestionarAnimales.git
 ![image](https://user-images.githubusercontent.com/67757313/216801283-d099c418-1e96-4671-8499-06e2f7afdc08.png)
 
 # Contributors
-* [Pablo Restrepo ](https://github.com/Pablo-Restrepo)
-* [Jojan Esteban Serna Serna](https://github.com/Jojan-Esteban-Serna)
 * [Joan Sebastian Tuquerrez Gomez](https://github.com/SebastianTuquerrezG)
 
 # License

@@ -83,6 +83,16 @@ namespace AppTiendaFloristeria.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap flower_with_leaves_icon_icons_com_68549 {
+            get {
+                object obj = ResourceManager.GetObject("flower-with-leaves_icon-icons.com_68549", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fluent_mdl2_product {
             get {
                 object obj = ResourceManager.GetObject("fluent-mdl2_product", resourceCulture);

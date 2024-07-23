@@ -277,7 +277,7 @@ namespace AppTiendaMascotas
             this.MinimumSize = new System.Drawing.Size(712, 552);
             this.Name = "vtnConexion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " Tienda de Mascotas";
+            this.Text = "Floristeria";
             this.Load += new System.EventHandler(this.Tienda_Load);
             this.panelCentral.ResumeLayout(false);
             this.panelCentral.PerformLayout();
