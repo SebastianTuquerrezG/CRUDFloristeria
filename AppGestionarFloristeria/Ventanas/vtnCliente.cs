@@ -4,10 +4,10 @@ using System.Data;
 using System.Data.Common;
 using System.Drawing;
 using System.Windows.Forms;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using MySql.Data.MySqlClient;
 using AppTiendaMascotas.accesoDatos;
+using System.IO;
+using OfficeOpenXml;
 
 namespace AppTiendaMascotas.Ventanas
 {
@@ -52,7 +52,6 @@ namespace AppTiendaMascotas.Ventanas
                 dgvConsultaClientes.AllowUserToDeleteRows = false;
                 dgvConsultaClientes.ReadOnly = false;
             }
-
         }
 
         private void style()
@@ -219,5 +218,58 @@ namespace AppTiendaMascotas.Ventanas
                 MessageBox.Show("Error al guardar los cambios: " + ex.Message);
             }
         }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Configurar el contexto de licencia para EPPlus
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Para uso no comercial
+
+                // Crear el archivo Excel
+                using (var package = new ExcelPackage())
+                {
+                    // Crear una hoja de trabajo
+                    var worksheet = package.Workbook.Worksheets.Add("Clientes");
+
+                    // Agregar el encabezado
+                    for (int i = 0; i < dataTable.Columns.Count; i++)
+                    {
+                        worksheet.Cells[1, i + 1].Value = dataTable.Columns[i].ColumnName;
+                    }
+
+                    // Agregar el contenido del DataTable a la hoja de trabajo
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < dataTable.Columns.Count; j++)
+                        {
+                            worksheet.Cells[i + 2, j + 1].Value = dataTable.Rows[i][j].ToString(); // Conversión explícita
+                        }
+                    }
+
+                    // Definir la ruta de la carpeta y del archivo
+                    string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatosEuroflor");
+
+                    // Verificar si la carpeta existe, si no, crearla
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    // Definir la ruta completa del archivo
+                    string filePath = Path.Combine(folderPath, "Clientes.xlsx");
+
+                    // Guardar el archivo
+                    File.WriteAllBytes(filePath, package.GetAsByteArray());
+
+                    MessageBox.Show($"Datos exportados exitosamente a {filePath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al exportar datos: " + ex.Message);
+            }
+        }
+
     }
 }

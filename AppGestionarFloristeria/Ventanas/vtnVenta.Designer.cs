@@ -58,6 +58,7 @@
             this.richTextBoxMensaje = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnGuardarChanges = new System.Windows.Forms.Button();
+            this.btnExportar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVenta)).BeginInit();
@@ -168,7 +169,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(12, 642);
+            this.label7.Location = new System.Drawing.Point(12, 639);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(131, 39);
             this.label7.TabIndex = 35;
@@ -429,13 +430,34 @@
             this.btnGuardarChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarChanges.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardarChanges.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarChanges.Location = new System.Drawing.Point(380, 641);
+            this.btnGuardarChanges.Location = new System.Drawing.Point(446, 641);
             this.btnGuardarChanges.Name = "btnGuardarChanges";
             this.btnGuardarChanges.Size = new System.Drawing.Size(232, 37);
             this.btnGuardarChanges.TabIndex = 62;
             this.btnGuardarChanges.Text = "Guardar Cambios";
             this.btnGuardarChanges.UseVisualStyleBackColor = false;
             this.btnGuardarChanges.Click += new System.EventHandler(this.btnGuardarChanges_Click);
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.BackColor = System.Drawing.Color.Transparent;
+            this.btnExportar.BackgroundImage = global::AppTiendaFloristeria.Properties.Resources.Rectangle_7__3_;
+            this.btnExportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExportar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnExportar.FlatAppearance.BorderSize = 0;
+            this.btnExportar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnExportar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.ForeColor = System.Drawing.Color.White;
+            this.btnExportar.Location = new System.Drawing.Point(194, 641);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(189, 37);
+            this.btnExportar.TabIndex = 63;
+            this.btnExportar.Text = "Exportar Excel";
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // vtnVenta
             // 
@@ -444,6 +466,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.ClientSize = new System.Drawing.Size(753, 555);
+            this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.btnGuardarChanges);
             this.Controls.Add(this.richTextBoxMensaje);
             this.Controls.Add(this.pictureBox2);
@@ -509,5 +532,6 @@
         private System.Windows.Forms.RichTextBox richTextBoxMensaje;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnGuardarChanges;
+        private System.Windows.Forms.Button btnExportar;
     }
 }

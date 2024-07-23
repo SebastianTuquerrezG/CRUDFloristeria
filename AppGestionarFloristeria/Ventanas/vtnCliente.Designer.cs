@@ -52,6 +52,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.timeFechaCliente = new System.Windows.Forms.DateTimePicker();
             this.btnGuardarChange = new System.Windows.Forms.Button();
+            this.btnExportar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsultaClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -352,13 +353,34 @@
             this.btnGuardarChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardarChange.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarChange.Location = new System.Drawing.Point(351, 449);
+            this.btnGuardarChange.Location = new System.Drawing.Point(462, 449);
             this.btnGuardarChange.Name = "btnGuardarChange";
             this.btnGuardarChange.Size = new System.Drawing.Size(201, 37);
             this.btnGuardarChange.TabIndex = 50;
             this.btnGuardarChange.Text = "Guardar Cambios";
             this.btnGuardarChange.UseVisualStyleBackColor = false;
             this.btnGuardarChange.Click += new System.EventHandler(this.btnGuardarChange_Click);
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.BackColor = System.Drawing.Color.Transparent;
+            this.btnExportar.BackgroundImage = global::AppTiendaFloristeria.Properties.Resources.Rectangle_7__3_;
+            this.btnExportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExportar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnExportar.FlatAppearance.BorderSize = 0;
+            this.btnExportar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnExportar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.ForeColor = System.Drawing.Color.White;
+            this.btnExportar.Location = new System.Drawing.Point(224, 449);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(170, 37);
+            this.btnExportar.TabIndex = 51;
+            this.btnExportar.Text = "Exportar Excel";
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // vtnCliente
             // 
@@ -367,6 +389,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.ClientSize = new System.Drawing.Size(736, 581);
+            this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.btnGuardarChange);
             this.Controls.Add(this.timeFechaCliente);
             this.Controls.Add(this.label8);
@@ -421,5 +444,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker timeFechaCliente;
         private System.Windows.Forms.Button btnGuardarChange;
+        private System.Windows.Forms.Button btnExportar;
     }
 }

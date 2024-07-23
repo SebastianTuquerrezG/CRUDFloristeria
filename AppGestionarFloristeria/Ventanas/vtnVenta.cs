@@ -1,5 +1,6 @@
 ﻿using AppTiendaMascotas.logica;
 using MySqlX.XDevAPI;
+using OfficeOpenXml;
 using System;
 using System.Data;
 using System.Drawing;
@@ -24,7 +25,6 @@ namespace AppTiendaMascotas.Ventanas
         private Boolean bandera2 = false;
         private Cliente cli = new Cliente();
         private Venta vent = new Venta();
-        private int codEmpleado = 1; // Define el ID del empleado o obténlo dinámicamente
         private DataTable dataTable;
 
         private void informacion()
@@ -438,6 +438,65 @@ namespace AppTiendaMascotas.Ventanas
             }
         }
 
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Configurar el contexto de licencia para EPPlus
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Para uso no comercial
 
+                // Crear el archivo Excel
+                using (var package = new ExcelPackage())
+                {
+                    // Crear una hoja de trabajo
+                    var worksheet = package.Workbook.Worksheets.Add("Ventas");
+
+                    // Agregar el encabezado
+                    for (int i = 0; i < dgvConsultaVenta.Columns.Count; i++)
+                    {
+                        if (dgvConsultaVenta.Columns[i].Name != "FOTO") // Excluir la columna de imagen
+                        {
+                            worksheet.Cells[1, i + 1].Value = dgvConsultaVenta.Columns[i].HeaderText;
+                        }
+                    }
+
+                    // Agregar el contenido de las filas
+                    for (int i = 0; i < dgvConsultaVenta.Rows.Count; i++)
+                    {
+                        if (dgvConsultaVenta.Rows[i].IsNewRow)
+                            continue;
+
+                        for (int j = 0; j < dgvConsultaVenta.Columns.Count; j++)
+                        {
+                            if (dgvConsultaVenta.Columns[j].Name != "FOTO") // Excluir la columna de imagen
+                            {
+                                worksheet.Cells[i + 2, j + 1].Value = dgvConsultaVenta.Rows[i].Cells[j].Value?.ToString(); // Conversión explícita
+                            }
+                        }
+                    }
+
+                    // Definir la ruta de la carpeta y del archivo
+                    string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DatosEuroflor");
+
+                    // Verificar si la carpeta existe, si no, crearla
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    // Definir la ruta completa del archivo
+                    string filePath = Path.Combine(folderPath, "Ventas.xlsx");
+
+                    // Guardar el archivo
+                    File.WriteAllBytes(filePath, package.GetAsByteArray());
+
+                    MessageBox.Show($"Datos exportados exitosamente a {filePath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al exportar datos: " + ex.Message);
+            }
+        }
     }
 }
